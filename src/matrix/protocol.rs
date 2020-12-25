@@ -54,12 +54,21 @@ pub struct Event {
     pub etype: String,
     pub state_key: Option<String>,
     pub content: serde_json::Value,
+    #[serde(default)]
     pub unsigned: EventUnsigned,
 }
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct EventUnsigned {
     pub transaction_id: Option<String>,
+}
+
+impl Default for EventUnsigned {
+    fn default() -> Self {
+        EventUnsigned {
+            transaction_id: None
+        }
+    }
 }
 
 #[derive(Debug, Clone, Serialize)]
